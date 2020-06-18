@@ -2,10 +2,12 @@ package repository;
 
 import model.Product;
 
-import java.util.List;
+import java.util.Map;
 
 public interface ProductRepository {
-    List<Product> getAllProducts();
+    Map<Integer, Product> getAllProducts();
 
     Product addProduct(Product product);
+
+    Product getProductById(int id);
 }

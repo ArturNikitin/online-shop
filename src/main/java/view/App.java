@@ -3,14 +3,26 @@ package view;
 import model.EatableProductBuilder;
 import model.Product;
 import model.UneatableProductBuilder;
-import repository.ConsoleRep;
+import repository.BasketRepository;
+import repository.BasketRepositoryImpl;
 import repository.ProductRepository;
+import repository.ProductRepositoryConsoleImpl;
+import service.command.*;
 
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class App {
-    public static void main(String[] args) {
-        ProductRepository productRepository = new ConsoleRep();
+
+
+    public static void main(String[] args) throws IOException {
+        start();
+
+    }
+
+    public static void start() throws IOException {
+        ProductRepository productRepository = new ProductRepositoryConsoleImpl();
 
         Product product = new EatableProductBuilder()
                 .name("orange")
@@ -25,11 +37,57 @@ public class App {
         productRepository.addProduct(product);
         productRepository.addProduct(product1);
 
+        BasketRepository basketRepository = new BasketRepositoryImpl();
 
-        List<Product> products = productRepository.getAllProducts();
-        products.forEach(x -> {
-            System.out.println(x.getName() + " " + x.getPrice());
-        });
+        Runner runner = new Runner(new AllProductsCommand(productRepository), new AllBasketCommand(basketRepository), new AddProduct(productRepository, basketRepository),
+                new Remove(basketRepository, productRepository), new Empty(basketRepository));
+
+
+        String response = null;
+        System.out.println("=====================HELLO=====================");
+
+        boolean exit = false;
+        boolean emptyBasket = true;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        while (!exit) {
+            System.out.println();
+            System.out.println("Press 1 to get all products");
+            System.out.println("Press 2 to add product to you basket");
+            System.out.println("Press 3 to check your basket");
+            if (!emptyBasket) {
+                System.out.println("Press 4 to empty your basket");
+                System.out.println("Press 5 to remove item from your basket");
+            }
+            response = br.readLine();
+            switch (response) {
+                case ("1"):
+                    runner.getAllProducts();
+                    break;
+                case ("2"):
+                    runner.addProduct();
+                    emptyBasket = false;
+                    break;
+                case ("3"):
+                    runner.showBasket();
+                    break;
+                case ("4"):
+                    runner.empty();
+                    emptyBasket = true;
+                    break;
+                case ("5"):
+                    runner.remove();
+                    break;
+                case ("exit"):
+                    exit = true;
+                    System.out.println("bye!");
+                    break;
+                default:
+                    System.out.println("incorrect command");
+            }
+        }
+        br.close();
 
     }
+
 }
