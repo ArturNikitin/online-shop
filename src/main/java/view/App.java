@@ -1,6 +1,8 @@
 package view;
 
-import model.*;
+import model.EatableProductBuilder;
+import model.Product;
+import model.UneatableProductBuilder;
 import repository.ConsoleRep;
 import repository.ProductRepository;
 
