@@ -53,7 +53,7 @@ public class App {
         while (!exit) {
             System.out.println();
             System.out.println("Press 1 to get all products");
-            System.out.println("Press 2 to add product to you basket");
+            System.out.println("Press 2 to add product to your basket");
             System.out.println("Press 3 to check your basket");
             if (!emptyBasket) {
                 System.out.println("Press 4 to empty your basket");
