@@ -1,19 +1,22 @@
 package repository.impl;
 
+import lombok.Getter;
 import model.Product;
 import repository.BasketRepository;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 public class BasketRepositoryImpl implements BasketRepository {
     private Map<Product, Integer> basket = new HashMap<>();
 
 
     @Override
-    public void addProduct(Product product) {
+    public Product addProduct(Product product) {
         basket.computeIfPresent(product, (k, v) -> ++v);
         basket.putIfAbsent(product, 1);
+        return product;
     }
 
     @Override

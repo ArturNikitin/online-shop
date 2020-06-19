@@ -26,7 +26,10 @@ public class AddProduct implements Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        addProduct(id);
+    }
 
+    public void addProduct(int id) {
         Product product = productRepository.getProductById(id);
         if (product == null) {
             System.out.println("This product doesn't exist" +

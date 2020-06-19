@@ -5,7 +5,7 @@ import model.Product;
 import java.util.Map;
 
 public interface BasketRepository {
-    void addProduct(Product product);
+    Product addProduct(Product product);
 
     Map<Product, Integer> getAllBasket();
 

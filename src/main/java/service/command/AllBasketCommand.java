@@ -3,11 +3,7 @@ package service.command;
 import lombok.AllArgsConstructor;
 import model.Product;
 import repository.BasketRepository;
-import repository.ProductRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
@@ -29,7 +25,6 @@ public class AllBasketCommand implements Command {
     }
 
     private double calculateSum(Map<Product, Integer> basket) {
-
         return basket.keySet().stream()
                 .mapToDouble(Product::getPrice)
                 .sum();
