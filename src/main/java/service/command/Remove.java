@@ -18,7 +18,7 @@ public class Remove implements Command {
 
     @Override
     public void execute() {
-        System.out.println("write the id of the product you want to remover from you basket");
+        System.out.println("write the id of the product you want to remover from your basket");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int id = 0;
         try {

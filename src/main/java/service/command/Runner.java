@@ -1,8 +1,9 @@
 package service.command;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Runner {
     private Command getAllProducts;
     private Command getGetAllProductsFromBasket;

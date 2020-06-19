@@ -4,9 +4,9 @@ import model.EatableProductBuilder;
 import model.Product;
 import model.UneatableProductBuilder;
 import repository.BasketRepository;
-import repository.BasketRepositoryImpl;
+import repository.impl.BasketRepositoryImpl;
 import repository.ProductRepository;
-import repository.ProductRepositoryConsoleImpl;
+import repository.impl.ProductRepositoryConsoleImpl;
 import service.command.*;
 
 import java.io.BufferedReader;
@@ -18,7 +18,6 @@ public class App {
 
     public static void main(String[] args) throws IOException {
         start();
-
     }
 
     public static void start() throws IOException {
@@ -39,8 +38,10 @@ public class App {
 
         BasketRepository basketRepository = new BasketRepositoryImpl();
 
-        Runner runner = new Runner(new AllProductsCommand(productRepository), new AllBasketCommand(basketRepository), new AddProduct(productRepository, basketRepository),
-                new Remove(basketRepository, productRepository), new Empty(basketRepository));
+        Runner runner = new RunnerBuilder()
+                .basketRepository(basketRepository)
+                .productRepository(productRepository)
+                .build();
 
 
         String response = null;
@@ -59,6 +60,7 @@ public class App {
                 System.out.println("Press 4 to empty your basket");
                 System.out.println("Press 5 to remove item from your basket");
             }
+            System.out.println("Type \"exit\" to close the app");
             response = br.readLine();
             switch (response) {
                 case ("1"):
