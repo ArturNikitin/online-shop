@@ -32,7 +32,7 @@ class BasketRepositoryImplTest {
         basketRepository.addProduct(product1);
         assertFalse(basketRepository.getBasket().isEmpty());
         assertNotNull(basketRepository.getBasket().get(product1));
-        assertEquals(basketRepository.getBasket().get(product1), 1);
+        assertEquals(1, basketRepository.getBasket().get(product1));
     }
 
     @Test
