@@ -1,7 +1,8 @@
-package service.command;
+package service;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import service.command.Command;
 
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Runner {

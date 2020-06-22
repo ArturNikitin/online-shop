@@ -1,7 +1,8 @@
-package service.command;
+package service;
 
 import repository.BasketRepository;
 import repository.ProductRepository;
+import service.command.*;
 
 public class RunnerBuilder {
     private BasketRepository basketRepository;

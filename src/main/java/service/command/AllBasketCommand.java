@@ -5,6 +5,7 @@ import model.Product;
 import repository.BasketRepository;
 
 import java.util.Map;
+import java.util.stream.DoubleStream;
 
 @AllArgsConstructor
 public class AllBasketCommand implements Command {
@@ -24,10 +25,11 @@ public class AllBasketCommand implements Command {
         }
     }
 
-    private double calculateSum(Map<Product, Integer> basket) {
-        return basket.keySet().stream()
-                .mapToDouble(Product::getPrice)
-                .sum();
-
+    public double calculateSum(Map<Product, Integer> basket) {
+         return basket.entrySet()
+                .stream()
+                .map(k -> k.getKey().getPrice() * k.getValue())
+                 .flatMapToDouble(DoubleStream::of)
+                 .sum();
     }
 }
