@@ -6,23 +6,13 @@ import model.UneatableProductBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import repository.BasketRepository;
 import repository.ProductRepository;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class AddProductTest {
     private BasketRepository basketRepository;
     private ProductRepository productRepository;
-    private Map<Product, Integer> basket = new HashMap<>();
-    private Map<Integer, Product> products = new HashMap<>();
     private Product product1;
     private Product product2;
     private AddProduct addProduct;

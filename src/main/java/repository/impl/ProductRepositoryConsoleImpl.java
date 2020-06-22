@@ -1,11 +1,12 @@
 package repository.impl;
 
+import lombok.Getter;
 import model.Product;
 import repository.ProductRepository;
-
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 public class ProductRepositoryConsoleImpl implements ProductRepository {
     private Map<Integer, Product> products = new HashMap<>();
     private static int id = 1;

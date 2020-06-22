@@ -14,9 +14,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BasketRepositoryImplTest {
-
     private BasketRepositoryImpl basketRepository;
-
     private Product product1;
     private Product product2;
 
