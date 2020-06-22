@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import model.EatableProductBuilder;
 import model.Product;
@@ -15,14 +15,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class App {
+    private static ProductRepository productRepository;
+    private static BasketRepository basketRepository;
 
 
     public static void main(String[] args) throws IOException {
-        start();
-    }
-
-    public static void start() throws IOException {
-        ProductRepository productRepository = new ProductRepositoryConsoleImpl();
+        productRepository = new ProductRepositoryConsoleImpl();
+        basketRepository = new BasketRepositoryImpl();
 
         Product product = new EatableProductBuilder()
                 .name("orange")
@@ -33,23 +32,25 @@ public class App {
                 .name("car")
                 .price(10000)
                 .build();
-
         productRepository.addProduct(product);
         productRepository.addProduct(product1);
 
-        BasketRepository basketRepository = new BasketRepositoryImpl();
+        start();
+    }
+
+    public static void start() throws IOException {
 
         Runner runner = new RunnerBuilder()
                 .basketRepository(basketRepository)
                 .productRepository(productRepository)
                 .build();
 
-
         String response = null;
         System.out.println("=====================HELLO=====================");
 
         boolean exit = false;
         boolean emptyBasket = true;
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         while (!exit) {
@@ -90,7 +91,5 @@ public class App {
             }
         }
         br.close();
-
     }
-
 }
