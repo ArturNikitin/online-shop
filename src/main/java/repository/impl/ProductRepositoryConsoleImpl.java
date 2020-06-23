@@ -9,7 +9,7 @@ import java.util.Map;
 @Getter
 public class ProductRepositoryConsoleImpl implements ProductRepository {
     private Map<Integer, Product> products = new HashMap<>();
-    private static int id = 1;
+    private int id = 1;
 
     @Override
     public Map<Integer, Product> getAllProducts() {
