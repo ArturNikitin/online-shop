@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Json {
     private static ObjectMapper objectMapper = getObjectMapper();
-    private static File eatableProducts = new File("eatableProducts.json");
-    private static File uneatableProducts = new File("uneatableProducts.json");
+    private static File eatableProducts = new File("src/main/resources/eatableProducts.json");
+    private static File uneatableProducts = new File("src/main/resources/uneatableProducts.json");
 
     public static ObjectMapper getObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
