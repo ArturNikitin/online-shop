@@ -1,11 +1,8 @@
 package controller;
 
-import model.EatableProductBuilder;
-import model.Product;
-import model.UneatableProductBuilder;
 import repository.BasketRepository;
-import repository.impl.BasketRepositoryImpl;
 import repository.ProductRepository;
+import repository.impl.BasketRepositoryImpl;
 import repository.impl.ProductRepositoryConsoleImpl;
 import service.Runner;
 import service.RunnerBuilder;
@@ -23,19 +20,14 @@ public class App {
         productRepository = new ProductRepositoryConsoleImpl();
         basketRepository = new BasketRepositoryImpl();
 
-        Product product = new EatableProductBuilder()
-                .name("orange")
-                .price(1.22)
-                .build();
-
-        Product product1 = new UneatableProductBuilder()
-                .name("car")
-                .price(10000)
-                .build();
-        productRepository.addProduct(product);
-        productRepository.addProduct(product1);
+        loadData();
 
         start();
+    }
+
+    public static void loadData() {
+        Json.eatableProductsFromJSON().forEach(productRepository::addProduct);
+        Json.uneatableProductsFromJSON().forEach(productRepository::addProduct);
     }
 
     public static void start() throws IOException {

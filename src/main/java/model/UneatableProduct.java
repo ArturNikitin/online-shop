@@ -1,10 +1,12 @@
 package model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class UneatableProduct extends Product {
-    UneatableProduct(UneatableProductBuilder builder) {
-        super(builder.getPrice(), builder.getName());
+    public UneatableProduct(double Price, String Name) {
+        super(Price, Name);
     }
 }

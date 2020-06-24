@@ -1,16 +1,11 @@
 package repository.impl;
 
-import model.EatableProductBuilder;
+import model.EatableProduct;
 import model.Product;
-import model.UneatableProductBuilder;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import repository.ProductRepository;
 
-import java.util.HashMap;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ProductRepositoryConsoleImplTest {
     private ProductRepositoryConsoleImpl repository;
@@ -19,8 +14,8 @@ class ProductRepositoryConsoleImplTest {
 
     @BeforeEach
     void setUp() {
-        product1 = new EatableProductBuilder().name("apple").price(10.20).build();
-        product2 = new UneatableProductBuilder().name("book").price(20.30).build();
+        product1 = new EatableProduct(10.20, "apple", 1.2);
+        product1 = new EatableProduct(20.30, "orange", 1.2);
         repository = new ProductRepositoryConsoleImpl();
     }
 

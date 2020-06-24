@@ -1,8 +1,8 @@
 package service.command;
 
-import model.EatableProductBuilder;
+import model.EatableProduct;
 import model.Product;
-import model.UneatableProductBuilder;
+import model.UneatableProduct;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ class AddProductTest {
     void setUp() {
         basketRepository = Mockito.mock(BasketRepository.class);
         productRepository = Mockito.mock(ProductRepository.class);
-        product1 = new EatableProductBuilder().name("apple").price(10.20).build();
-        product2 = new UneatableProductBuilder().name("book").price(20.30).build();
+        product1 = new EatableProduct(10.20, "apple", 1.2);
+        product2 = new UneatableProduct(20.30, "book");
         addProduct = new AddProduct(productRepository, basketRepository);
     }
 

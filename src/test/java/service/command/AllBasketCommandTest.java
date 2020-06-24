@@ -1,8 +1,8 @@
 package service.command;
 
-import model.EatableProductBuilder;
+import model.EatableProduct;
 import model.Product;
-import model.UneatableProductBuilder;
+import model.UneatableProduct;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +11,8 @@ import repository.BasketRepository;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class AllBasketCommandTest {
     private BasketRepository basketRepository;
@@ -22,8 +24,8 @@ class AllBasketCommandTest {
     @BeforeEach
     void setUp() {
         basketRepository = Mockito.mock(BasketRepository.class);
-        product1 = new EatableProductBuilder().name("apple").price(10.20).build();
-        product2 = new UneatableProductBuilder().name("book").price(20).build();
+        product1 = new EatableProduct(10.20, "apple", 1.2);
+        product2 = new UneatableProduct(20.30, "book");
         command = new AllBasketCommand(basketRepository);
         products.put(product1, 2);
         products.put(product2, 3);
@@ -45,12 +47,16 @@ class AllBasketCommandTest {
 
     @Test
     void calculateSum() {
-        Assertions.assertEquals(80.4,command.calculateSum(products));
+        products.forEach((k,v) ->{
+            System.out.println(k.getName() + " " + k.getPrice() + " " + v);
+        });
+        assertTrue(Math.abs(command.calculateSum(products)- 81.3) < .0001);
+
     }
 
     @Test
     void calculateWrongSum() {
-        Assertions.assertNotEquals(82.3,command.calculateSum(products));
+        assertFalse(Math.abs(command.calculateSum(products)- 82.3) < .0001);
     }
 
 }

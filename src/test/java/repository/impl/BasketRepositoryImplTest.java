@@ -1,8 +1,7 @@
 package repository.impl;
 
-import model.EatableProductBuilder;
+import model.EatableProduct;
 import model.Product;
-import model.UneatableProductBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +18,8 @@ class BasketRepositoryImplTest {
     @BeforeEach
     void setUp() {
         basketRepository = new BasketRepositoryImpl();
-        product1 = new EatableProductBuilder().name("apple").price(10.20).build();
-        product2 = new UneatableProductBuilder().name("book").price(20.30).build();
+        product1 = new EatableProduct(10.20, "apple", 1.2);
+        product1 = new EatableProduct(20.30, "orange", 1.2);
     }
 
     @AfterEach
@@ -45,11 +44,10 @@ class BasketRepositoryImplTest {
     }
 
 
-
     @Test
     void getAllBasket() {
-        basketRepository.getBasket().put(product1,2);
-        basketRepository.getBasket().put(product2,2);
+        basketRepository.getBasket().put(product1, 2);
+        basketRepository.getBasket().put(product2, 2);
         Map<Product, Integer> basket = basketRepository.getAllBasket();
         assertNotNull(basket);
         assertEquals(basket.get(product1), 2);
@@ -58,8 +56,8 @@ class BasketRepositoryImplTest {
 
     @Test
     void removeProduct() {
-        basketRepository.getBasket().put(product1,2);
-        basketRepository.getBasket().put(product2,2);
+        basketRepository.getBasket().put(product1, 2);
+        basketRepository.getBasket().put(product2, 2);
         basketRepository.removeProduct(product1);
         Map<Product, Integer> basket = basketRepository.getBasket();
         assertNotNull(basket);
@@ -69,8 +67,8 @@ class BasketRepositoryImplTest {
 
     @Test
     void emptyBasket() {
-        basketRepository.getBasket().put(product1,2);
-        basketRepository.getBasket().put(product2,2);
+        basketRepository.getBasket().put(product1, 2);
+        basketRepository.getBasket().put(product2, 2);
         basketRepository.emptyBasket();
         Map<Product, Integer> basket = basketRepository.getBasket();
         assertTrue(basket.isEmpty());

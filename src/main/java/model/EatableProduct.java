@@ -1,11 +1,15 @@
 package model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class EatableProduct extends Product {
+    private double weight;
 
-    EatableProduct(EatableProductBuilder builder) {
-        super(builder.getPrice(), builder.getName());
+    public EatableProduct(double Price, String Name, double weight) {
+        super(Price, Name);
+        this.weight = weight;
     }
 }

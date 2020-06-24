@@ -1,7 +1,9 @@
 package service.command;
 
 import lombok.AllArgsConstructor;
+import model.EatableProduct;
 import model.Product;
+import model.UneatableProduct;
 import repository.BasketRepository;
 
 import java.util.Map;
@@ -19,7 +21,14 @@ public class AllBasketCommand implements Command {
             System.out.println("Your basket is empty");
         } else {
             basket.forEach((k, v) -> {
-                System.out.println(k.getName() + ". " + v + " pcs");
+                if (k instanceof EatableProduct) {
+                    if (((EatableProduct) k).getWeight() != 0) {
+                        System.out.println(k.getName() + ". " + v*((EatableProduct) k).getWeight() + " kg");
+                    } else
+                    System.out.println(k.getName() + ". " + v + " pcs");
+                } else {
+                    System.out.println(k.getName() + ". " + v + " pcs");
+                }
             });
             System.out.println("Sum of your items in the basket = " + calculateSum(basket) + "$");
         }
