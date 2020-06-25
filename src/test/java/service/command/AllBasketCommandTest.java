@@ -32,21 +32,21 @@ class AllBasketCommandTest {
     }
 
     @Test
-    void executeEmpty() {
+    void executeEmptyTest() {
         Mockito.when(basketRepository.getAllBasket()).thenReturn(new HashMap<>());
         command.execute();
         Mockito.verify(basketRepository, Mockito.times(1)).getAllBasket();
     }
 
     @Test
-    void execute() {
+    void executeTest() {
         Mockito.when(basketRepository.getAllBasket()).thenReturn(products);
         command.execute();
         Mockito.verify(basketRepository, Mockito.times(1)).getAllBasket();
     }
 
     @Test
-    void calculateSum() {
+    void calculateSumTest() {
         products.forEach((k, v) -> {
             System.out.println(k.getName() + " " + k.getPrice() + " " + v);
         });
@@ -55,7 +55,7 @@ class AllBasketCommandTest {
     }
 
     @Test
-    void calculateWrongSum() {
+    void calculateWrongSumTest() {
         assertFalse(Math.abs(command.calculateSum(products) - 82.3) < .0001);
     }
 
