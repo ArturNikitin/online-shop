@@ -1,12 +1,11 @@
 package controller;
 
-import model.EatableProduct;
-import model.Product;
-import model.UneatableProduct;
 import repository.BasketRepository;
 import repository.ProductRepository;
 import repository.WarehouseRepository;
-import repository.impl.*;
+import repository.impl.BasketRepositoryConsoleImpl;
+import repository.impl.ProductRepositoryJdbcImpl;
+import repository.impl.WarehouseRepositoryImpl;
 import service.Runner;
 import service.RunnerBuilder;
 
@@ -16,7 +15,7 @@ import java.io.InputStreamReader;
 
 public class App {
     private static BasketRepository basketRepository = new BasketRepositoryConsoleImpl();
-    private static ProductRepository<Product> productRepository = new ProductRepositoryJdbcImpl();
+    private static ProductRepository productRepository = new ProductRepositoryJdbcImpl();
     private static WarehouseRepository warehouseRepository = new WarehouseRepositoryImpl();
 
     public static void main(String[] args) throws IOException {
