@@ -3,16 +3,19 @@ package service.command;
 import model.Product;
 import repository.BasketRepository;
 import repository.ProductRepository;
+import repository.WarehouseRepository;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Remove implements Command {
     private BasketRepository basketRepository;
-    private ProductRepository productRepository;
+    private WarehouseRepository warehouseRepository;
+    private ProductRepository<Product> productRepository;
 
-    public Remove(BasketRepository repository, ProductRepository productRepository) {
-        this.basketRepository = repository;
+    public Remove(BasketRepository basketRepository, WarehouseRepository warehouseRepository, ProductRepository<Product> productRepository) {
+        this.basketRepository = basketRepository;
+        this.warehouseRepository = warehouseRepository;
         this.productRepository = productRepository;
     }
 
@@ -32,6 +35,7 @@ public class Remove implements Command {
             System.out.println("This product doesn't exist" +
                     "\nPlease enter valid product id");
         } else {
+            warehouseRepository.updateStockValue(product, basketRepository.getAllBasket().get(product));
             basketRepository.removeProduct(product);
             System.out.println("thanks");
         }

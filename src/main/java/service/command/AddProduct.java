@@ -3,17 +3,20 @@ package service.command;
 import model.Product;
 import repository.BasketRepository;
 import repository.ProductRepository;
+import repository.WarehouseRepository;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class AddProduct implements Command {
-    private ProductRepository productRepository;
+    private ProductRepository<Product> productRepository;
     private BasketRepository basketRepository;
+    private WarehouseRepository warehouseRepository;
 
-    public AddProduct(ProductRepository productRepository, BasketRepository basketRepository) {
+    public AddProduct(ProductRepository<Product> productRepository, BasketRepository basketRepository, WarehouseRepository warehouseRepository) {
         this.productRepository = productRepository;
         this.basketRepository = basketRepository;
+        this.warehouseRepository = warehouseRepository;
     }
 
     @Override
@@ -35,8 +38,14 @@ public class AddProduct implements Command {
             System.out.println("This product doesn't exist" +
                     "\nPlease enter valid product id");
         } else {
-            basketRepository.addProduct(product);
-            System.out.println("thanks");
+            int stockValue = warehouseRepository.getStockValue(product);
+            if (stockValue == 0) {
+                System.out.println("We are sorry, but we are out of stock for this item");
+            } else {
+                basketRepository.addProduct(product);
+                warehouseRepository.updateStockValue(product);
+                System.out.printf("\nThanks, we added %s to your basket", product.getName());
+            }
         }
     }
 }

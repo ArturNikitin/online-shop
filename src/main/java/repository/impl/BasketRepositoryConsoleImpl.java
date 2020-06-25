@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Getter
-public class BasketRepositoryImpl implements BasketRepository {
+public class BasketRepositoryConsoleImpl implements BasketRepository {
     private Map<Product, Integer> basket = new HashMap<>();
 
 

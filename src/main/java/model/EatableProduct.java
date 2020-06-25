@@ -8,8 +8,13 @@ import lombok.NoArgsConstructor;
 public class EatableProduct extends Product {
     private double weight;
 
-    public EatableProduct(double Price, String Name, double weight) {
-        super(Price, Name);
+    public EatableProduct(int id, double price, String name, double weight) {
+        super(id, price, name);
+        this.weight = weight;
+    }
+
+    public EatableProduct(double price, String name, double weight) {
+        super(price, name);
         this.weight = weight;
     }
 }

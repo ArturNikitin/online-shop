@@ -1,9 +1,12 @@
 package controller;
 
+import model.EatableProduct;
+import model.Product;
+import model.UneatableProduct;
 import repository.BasketRepository;
 import repository.ProductRepository;
-import repository.impl.BasketRepositoryImpl;
-import repository.impl.ProductRepositoryConsoleImpl;
+import repository.WarehouseRepository;
+import repository.impl.*;
 import service.Runner;
 import service.RunnerBuilder;
 
@@ -12,29 +15,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class App {
-    private static ProductRepository productRepository;
-    private static BasketRepository basketRepository;
-
+    private static BasketRepository basketRepository = new BasketRepositoryConsoleImpl();
+    private static ProductRepository<Product> productRepository = new ProductRepositoryJdbcImpl();
+    private static WarehouseRepository warehouseRepository = new WarehouseRepositoryImpl();
 
     public static void main(String[] args) throws IOException {
-        productRepository = new ProductRepositoryConsoleImpl();
-        basketRepository = new BasketRepositoryImpl();
-
-        loadData();
-
         start();
     }
 
-    public static void loadData() {
-        Json.eatableProductsFromJSON().forEach(productRepository::addProduct);
-        Json.uneatableProductsFromJSON().forEach(productRepository::addProduct);
-    }
 
     public static void start() throws IOException {
 
         Runner runner = new RunnerBuilder()
                 .basketRepository(basketRepository)
                 .productRepository(productRepository)
+                .warehouseRepository(warehouseRepository)
                 .build();
 
         String response = null;
@@ -68,11 +63,20 @@ public class App {
                     runner.showBasket();
                     break;
                 case ("4"):
-                    runner.empty();
-                    emptyBasket = true;
+                    if (!emptyBasket) {
+                        System.out.println("incorrect command");
+                    } else {
+                        runner.empty();
+                        emptyBasket = true;
+                    }
                     break;
                 case ("5"):
-                    runner.remove();
+                    if (!emptyBasket) {
+                        System.out.println("incorrect command");
+                    } else {
+                        runner.remove();
+                        emptyBasket = true;
+                    }
                     break;
                 case ("exit"):
                     exit = true;

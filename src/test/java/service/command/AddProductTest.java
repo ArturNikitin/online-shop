@@ -5,14 +5,17 @@ import model.Product;
 import model.UneatableProduct;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import repository.BasketRepository;
 import repository.ProductRepository;
+import repository.WarehouseRepository;
 
 class AddProductTest {
     private BasketRepository basketRepository;
     private ProductRepository productRepository;
+    private WarehouseRepository warehouseRepository;
     private Product product1;
     private Product product2;
     private AddProduct addProduct;
@@ -22,9 +25,10 @@ class AddProductTest {
     void setUp() {
         basketRepository = Mockito.mock(BasketRepository.class);
         productRepository = Mockito.mock(ProductRepository.class);
+        warehouseRepository = Mockito.mock(WarehouseRepository.class);
         product1 = new EatableProduct(10.20, "apple", 1.2);
         product2 = new UneatableProduct(20.30, "book");
-        addProduct = new AddProduct(productRepository, basketRepository);
+        addProduct = new AddProduct(productRepository, basketRepository, warehouseRepository);
     }
 
     @AfterEach
@@ -35,6 +39,7 @@ class AddProductTest {
     void addCorrectProductTest() {
         Mockito.when(productRepository.getProductById(1)).thenReturn(product2);
         Mockito.when(basketRepository.addProduct(product2)).thenReturn(product2);
+        Mockito.when(warehouseRepository.getStockValue(product2)).thenReturn(1);
 
         addProduct.addProduct(1);
 
