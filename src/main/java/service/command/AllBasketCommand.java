@@ -3,7 +3,6 @@ package service.command;
 import lombok.AllArgsConstructor;
 import model.EatableProduct;
 import model.Product;
-import model.UneatableProduct;
 import repository.BasketRepository;
 
 import java.util.Map;
@@ -23,9 +22,9 @@ public class AllBasketCommand implements Command {
             basket.forEach((k, v) -> {
                 if (k instanceof EatableProduct) {
                     if (((EatableProduct) k).getWeight() != 0) {
-                        System.out.println(k.getName() + ". " + v*((EatableProduct) k).getWeight() + " kg");
+                        System.out.println(k.getName() + ". " + v * ((EatableProduct) k).getWeight() + " kg");
                     } else
-                    System.out.println(k.getName() + ". " + v + " pcs");
+                        System.out.println(k.getName() + ". " + v + " pcs");
                 } else {
                     System.out.println(k.getName() + ". " + v + " pcs");
                 }
@@ -35,10 +34,10 @@ public class AllBasketCommand implements Command {
     }
 
     public double calculateSum(Map<Product, Integer> basket) {
-         return basket.entrySet()
+        return basket.entrySet()
                 .stream()
                 .map(k -> k.getKey().getPrice() * k.getValue())
-                 .flatMapToDouble(DoubleStream::of)
-                 .sum();
+                .flatMapToDouble(DoubleStream::of)
+                .sum();
     }
 }

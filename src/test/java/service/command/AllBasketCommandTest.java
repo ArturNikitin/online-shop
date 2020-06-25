@@ -3,7 +3,6 @@ package service.command;
 import model.EatableProduct;
 import model.Product;
 import model.UneatableProduct;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -12,7 +11,8 @@ import repository.BasketRepository;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AllBasketCommandTest {
     private BasketRepository basketRepository;
@@ -47,16 +47,16 @@ class AllBasketCommandTest {
 
     @Test
     void calculateSum() {
-        products.forEach((k,v) ->{
+        products.forEach((k, v) -> {
             System.out.println(k.getName() + " " + k.getPrice() + " " + v);
         });
-        assertTrue(Math.abs(command.calculateSum(products)- 81.3) < .0001);
+        assertTrue(Math.abs(command.calculateSum(products) - 81.3) < .0001);
 
     }
 
     @Test
     void calculateWrongSum() {
-        assertFalse(Math.abs(command.calculateSum(products)- 82.3) < .0001);
+        assertFalse(Math.abs(command.calculateSum(products) - 82.3) < .0001);
     }
 
 }

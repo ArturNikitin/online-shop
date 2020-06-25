@@ -1,5 +1,6 @@
 package service.command;
 
+import lombok.AllArgsConstructor;
 import model.Product;
 import repository.BasketRepository;
 import repository.ProductRepository;
@@ -8,16 +9,11 @@ import repository.WarehouseRepository;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+@AllArgsConstructor
 public class AddProduct implements Command {
-    private ProductRepository<Product> productRepository;
+    private ProductRepository productRepository;
     private BasketRepository basketRepository;
     private WarehouseRepository warehouseRepository;
-
-    public AddProduct(ProductRepository<Product> productRepository, BasketRepository basketRepository, WarehouseRepository warehouseRepository) {
-        this.productRepository = productRepository;
-        this.basketRepository = basketRepository;
-        this.warehouseRepository = warehouseRepository;
-    }
 
     @Override
     public void execute() {

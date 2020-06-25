@@ -1,7 +1,6 @@
 package repository.impl;
 
 import model.Product;
-import model.UneatableProduct;
 import repository.JdbcUtils;
 import repository.WarehouseRepository;
 
@@ -22,7 +21,7 @@ public class WarehouseRepositoryImpl implements WarehouseRepository {
             statement.setInt(1, product.getId());
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-               result = resultSet.getInt("stock_value");
+                result = resultSet.getInt("stock_value");
             }
             statement.close();
         } catch (SQLException e) {
@@ -32,12 +31,12 @@ public class WarehouseRepositoryImpl implements WarehouseRepository {
     }
 
     /**
-    * Decreases stock value by 1
-    * */
+     * Decreases stock value by 1
+     */
     @Override
     public void updateStockValue(Product product) {
         PreparedStatement statement = null;
-        try(Connection connection = JdbcUtils.getConnection()) {
+        try (Connection connection = JdbcUtils.getConnection()) {
             statement = connection.prepareStatement("UPDATE warehouse " +
                     "SET stock_value = (SELECT stock_value FROM warehouse WHERE product_id = (?)) -1 " +
                     "WHERE product_id = (?)");
@@ -53,7 +52,7 @@ public class WarehouseRepositoryImpl implements WarehouseRepository {
     @Override
     public void updateStockValue(Product product, int stockValue) {
         PreparedStatement statement = null;
-        try(Connection connection = JdbcUtils.getConnection()) {
+        try (Connection connection = JdbcUtils.getConnection()) {
             statement = connection.prepareStatement("UPDATE warehouse " +
                     "SET stock_value = (?) " +
                     "WHERE product_id = (?)");

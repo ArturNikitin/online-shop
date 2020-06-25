@@ -4,10 +4,10 @@ import model.Product;
 
 import java.util.Set;
 
-public interface ProductRepository<T extends Product> {
-    Set<T> getAllProducts();
+public interface ProductRepository {
+    Set<Product> getAllProducts();
 
-    T addProduct(T product);
+    Product addProduct(Product product);
 
-    T getProductById(int id);
+    Product getProductById(int id);
 }

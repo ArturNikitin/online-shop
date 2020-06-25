@@ -1,5 +1,6 @@
 package service.command;
 
+import lombok.AllArgsConstructor;
 import model.Product;
 import repository.BasketRepository;
 import repository.ProductRepository;
@@ -8,16 +9,11 @@ import repository.WarehouseRepository;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+@AllArgsConstructor
 public class Remove implements Command {
     private BasketRepository basketRepository;
     private WarehouseRepository warehouseRepository;
-    private ProductRepository<Product> productRepository;
-
-    public Remove(BasketRepository basketRepository, WarehouseRepository warehouseRepository, ProductRepository<Product> productRepository) {
-        this.basketRepository = basketRepository;
-        this.warehouseRepository = warehouseRepository;
-        this.productRepository = productRepository;
-    }
+    private ProductRepository productRepository;
 
     @Override
     public void execute() {

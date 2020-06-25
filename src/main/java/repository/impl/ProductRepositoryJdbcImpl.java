@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ProductRepositoryJdbcImpl implements ProductRepository<Product> {
+public class ProductRepositoryJdbcImpl implements ProductRepository {
     @Override
     public Set<Product> getAllProducts() {
         Set<Product> products = new HashSet<>();

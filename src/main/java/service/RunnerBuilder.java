@@ -1,6 +1,5 @@
 package service;
 
-import model.Product;
 import repository.BasketRepository;
 import repository.ProductRepository;
 import repository.WarehouseRepository;
@@ -8,7 +7,7 @@ import service.command.*;
 
 public class RunnerBuilder {
     private BasketRepository basketRepository;
-    private ProductRepository<Product> productRepository;
+    private ProductRepository productRepository;
     private WarehouseRepository warehouseRepository;
 
     public RunnerBuilder basketRepository(BasketRepository basketRepository) {
@@ -16,7 +15,7 @@ public class RunnerBuilder {
         return this;
     }
 
-    public RunnerBuilder productRepository(ProductRepository<Product> productRepository) {
+    public RunnerBuilder productRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
         return this;
     }
