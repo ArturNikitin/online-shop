@@ -1,13 +1,18 @@
 package model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class UneatableProduct extends Product {
-    public UneatableProduct(int id, double price, String name) {
+    private UneatableProductType type;
+
+    public UneatableProduct(int id, double price, String name, UneatableProductType type) {
         super(id, price, name);
+        this.type = type;
     }
 
     public UneatableProduct(double price, String name) {

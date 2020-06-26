@@ -25,7 +25,10 @@ public class Remove implements Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        remove(id);
+    }
 
+    public void remove(int id){
         Product product = productRepository.getProductById(id);
         if (product == null) {
             System.out.println("This product doesn't exist" +

@@ -14,11 +14,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class App {
-    private static BasketRepository basketRepository = new BasketRepositoryConsoleImpl();
-    private static ProductRepository productRepository = new ProductRepositoryJdbcImpl();
-    private static WarehouseRepository warehouseRepository = new WarehouseRepositoryImpl();
+    private static BasketRepository basketRepository;
+    private static ProductRepository productRepository;
+    private static WarehouseRepository warehouseRepository;
 
     public static void main(String[] args) throws IOException {
+        basketRepository = new BasketRepositoryConsoleImpl();
+        productRepository = new ProductRepositoryJdbcImpl();
+        warehouseRepository = new WarehouseRepositoryImpl();
         start();
     }
 

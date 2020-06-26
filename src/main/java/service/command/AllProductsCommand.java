@@ -2,6 +2,7 @@ package service.command;
 
 import lombok.AllArgsConstructor;
 import model.EatableProduct;
+import model.UneatableProduct;
 import repository.ProductRepository;
 
 @AllArgsConstructor
@@ -18,7 +19,7 @@ public class AllProductsCommand implements Command {
                     System.out.printf("\nProduct: %s\nID: %d\nPrice: %.2f$\n1 pcs\n", v.getName(), v.getId(), v.getPrice());
                 }
             } else
-                System.out.printf("\nProduct: %s\nID: %d\nPrice: %.2f$\n1 pcs\n", v.getName(), v.getId(), v.getPrice());
+                System.out.printf("\nProduct: %s\nID: %d\nPrice: %.2f$\n1 pcs\nType:%s\n", v.getName(), v.getId(), v.getPrice(), ((UneatableProduct) v).getType());
         });
 
     }

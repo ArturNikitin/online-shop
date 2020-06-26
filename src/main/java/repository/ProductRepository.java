@@ -7,7 +7,5 @@ import java.util.Set;
 public interface ProductRepository {
     Set<Product> getAllProducts();
 
-    Product addProduct(Product product);
-
     Product getProductById(int id);
 }

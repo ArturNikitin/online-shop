@@ -13,8 +13,8 @@ INSERT INTO eatable_products VALUES
 (4, 1.2);
 
 INSERT INTO uneatable_products VALUES
-(5),
-(6);
+(5, 'VEHICLE'),
+(6, 'FOR_CHILDREN');
 
 INSERT INTO warehouse VALUES
 (1, 50),

@@ -3,6 +3,7 @@ package repository.impl;
 import model.EatableProduct;
 import model.Product;
 import model.UneatableProduct;
+import model.UneatableProductType;
 import repository.JdbcUtils;
 import repository.ProductRepository;
 
@@ -24,9 +25,8 @@ public class ProductRepositoryJdbcImpl implements ProductRepository {
                     "INNER JOIN uneatable_products u ON p.id = u.product_id");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                System.out.println("Hello!" + resultSet.getString("name"));
                 products.add(new UneatableProduct(resultSet.getInt("id"), resultSet.getDouble("price"),
-                        resultSet.getString("name")));
+                        resultSet.getString("name"), UneatableProductType.valueOf(resultSet.getString("product_type"))));
             }
             statement.close();
 
@@ -46,10 +46,6 @@ public class ProductRepositoryJdbcImpl implements ProductRepository {
         return products;
     }
 
-    @Override
-    public Product addProduct(Product product) {
-        return null;
-    }
 
     @Override
     public Product getProductById(int id) {
@@ -80,7 +76,7 @@ public class ProductRepositoryJdbcImpl implements ProductRepository {
                 ResultSet resultSet = statement.executeQuery();
                 if (resultSet.next()) {
                     product = new UneatableProduct(resultSet.getInt("id"), resultSet.getDouble("price"),
-                            resultSet.getString("name"));
+                            resultSet.getString("name"), UneatableProductType.valueOf(resultSet.getString("product_type")));
                 }
                 statement.close();
             } catch (SQLException e) {
