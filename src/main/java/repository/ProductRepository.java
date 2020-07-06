@@ -4,8 +4,8 @@ import model.Product;
 
 import java.util.Set;
 
-public interface ProductRepository {
-    Set<Product> getAllProducts();
+public interface ProductRepository<T extends Product> {
+    Set<T> getAllProducts();
 
-    Product getProductById(int id);
+    T getProductById(int id);
 }

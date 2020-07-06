@@ -23,3 +23,9 @@ INSERT INTO warehouse VALUES
 (4, 70),
 (5, 1),
 (6, 7);
+
+INSERT INTO users (name, password) VALUES
+('admin', '123');
+
+INSERT INTO cart VALUES
+(1, 2, 2);
